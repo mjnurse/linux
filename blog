@@ -1,0 +1,31 @@
+#!/bin/bash
+help_text="
+NAME
+   blog - Creates a new Blog article
+
+USAGE
+   blog <title: spaces allowed>
+
+DESCRIPTION
+   A basic script to create a new blog article.
+"
+
+help_line="Creates a Blog article: blog <title: spaces allowed>"
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+   echo "$help_text"
+   exit
+fi
+
+params=$*
+date_str=$(date +'%y-%m-%d')
+
+filename=Blog.${date_str}_-_${params// /_}.article
+echo $filename
+
+read -p "Create [yN]: " yn
+
+if [ "${yn^}" == "Y" ]; then
+   echo "# ${params}" > /c/MJN/gdrive/web/content-mjnurse-uk/Blog.articles/$filename
+   /home/martin/bin/gv /c/MJN/gdrive/web/content-mjnurse-uk/Blog.articles/$filename
+fi
