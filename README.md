@@ -9,6 +9,7 @@ help_lines:
 a - article:      Creates a new website article: article <title: spaces allowed> 
 b - blog:         Creates a Blog article: blog <title: spaces allowed> 
 c - cls:          Clear terminal and putty terminal buffer 
+g - gvim:         Runs windows gvim and fixes file paths 
 n - note:         Creates a Note article: note <title: spaces allowed> 
 o - or:           Connect to oracle using sqlplus 
 p - pg:           Connect to postgresql using psql 
