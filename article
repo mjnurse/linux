@@ -1,0 +1,62 @@
+#!/bin/bash
+help_text="
+NAME
+   article - Creates a new article
+
+USAGE
+   article <Article Title - Words with spaces>
+
+DESCRIPTION
+   A basic script to create a new article.
+"
+help_line="Creates a new website article: article <title: spaces allowed>"
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+   echo "$help_text"
+   exit
+fi
+
+if [[ "$1" == "-s" ]]; then
+   shift
+   section_name="$1"
+   shift
+fi
+
+params=$*
+
+# Prompt for the section
+
+cd /c/MJN/gdrive/web/content-mjnurse-uk
+if [[ "$section_name" == "" ]]; then
+   ls * | grep "articles" | sed "s/.articles.*//" > /tmp/article.tmp
+   section_num=1
+   echo SECTIONS:
+   while read line; do
+      echo "$section_num: $line"
+      let section_num=section_num+1
+   done < /tmp/article.tmp
+   read -p "Select section: " chosen_num
+   
+   section_num=1
+   while read line; do
+      if [[ "$section_num" == "$chosen_num" ]]; then
+         section_name="$line"
+      fi
+      let section_num=section_num+1
+   done < /tmp/article.tmp
+fi
+
+ls /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles
+filename=${section_name}.${params// /_}.article
+echo ------------------------------
+echo New File: $filename
+
+read -p "Create [yN]: " yn
+
+if [ "${yn^}" == "Y" ]; then
+   echo "# ${params}" > /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles/$filename
+   cd /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles
+   gvim $filename
+   cd /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles
+   ls
+fi
