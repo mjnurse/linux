@@ -13,6 +13,7 @@ g - gvim:         Runs windows gvim and fixes file paths
 n - note:         Creates a Note article: note <title: spaces allowed> 
 o - or:           Connect to oracle using sqlplus 
 p - pg:           Connect to postgresql using psql 
+t - tidy:         Fixes issues such as permission issues with files in current directory 
 ```
 
 ### h - help_line Extraction Script

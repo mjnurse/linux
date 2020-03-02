@@ -1,0 +1,210 @@
+#!/bin/bash
+help_text="
+NAME
+   tidy - Fixes issues such as permission issues with files in current directory.
+
+USAGE
+   tidy
+
+DESCRIPTION
+   Fixes issues such as permission issues with files in current directory.
+"
+
+help_line="Fixes issues such as permission issues with files in current directory"
+
+echo ================================================================================
+echo Executable but not '#!/bin/bash'
+echo ================================================================================
+
+for f in $(find . -executable); do
+   if [[ -f $f && ! -L $f ]]; then
+      line1="$(head -1 $f)"
+      line1=${line1//[$' \t\r\n']}
+      if [[ "$line1" != "#!/bin/bash" ]]; then
+         echo --------------------------------------------------------------------------------
+         echo FILE: $f
+         echo --------------------------------------------------------------------------------
+         echo First 5 lines:
+         echo --------------
+         head -5 $f
+         echo
+         read -p "[i]gnore rule, [r]emove exec, [a]dd '#!/bin/bash', [s]kip, q[uit]. [iraSq]?: " opt
+         case $opt in
+            r|R)
+               chmod a-x $f;;
+            a|A)
+               sed -i '1i#!/bin/bash' $f;;
+            i|I)
+               break;;
+            q|Q)
+               exit;;
+         esac
+      fi 
+   fi
+done
+
+echo ================================================================================
+echo '#!/bin/bash' but not Executable
+echo ================================================================================
+
+for f in $(find . ! -executable); do
+   if [[ -f $f && ! -L $f ]]; then
+      line1="$(head -1 $f)"
+      line1=${line1//[$' \t\r\n']}
+      if [[ "$line1" == "#!/bin/bash" ]]; then
+         echo --------------------------------------------------------------------------------
+         echo FILE: $f
+         echo --------------------------------------------------------------------------------
+         echo First 5 lines:
+            echo --------------
+         head -5 $f
+         echo
+         read -p "[i]gnore rule, [d]elete '#!/bin/bash', [m]ake exec, [s]kip, q[uit]. [idmSq]?: " opt
+         case $opt in
+            d|D)
+               sed -i '1d' $f;;
+            m|M)
+               chmod u+x $f;;
+            i|I)
+               break;;
+            q|Q)
+               exit;;
+         esac
+      fi 
+   fi
+done
+
+echo ================================================================================
+echo Writable by Other
+echo ================================================================================
+
+for f in $(find . -perm -o=w); do
+   if [[ -f $f && ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p "[i]gnore rule, [r]remove writeable other, [s]kip, q[uit]. [irSq]?: " opt
+      case $opt in
+         r|R)
+            chmod o-w $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo Writable by Group
+echo ================================================================================
+
+for f in $(find . -perm -g=w); do
+   if [[ -f $f && ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p "[i]gnore rule, [r]remove writeable group, [s]kip, q[uit]. [irSq]?: " opt
+      case $opt in
+         r|R)
+            chmod g-w $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo Executable by Other
+echo ================================================================================
+
+for f in $(find . -perm -o=x); do
+   if [[ -f $f && ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p "[i]gnore rule, [r]remove Exec other, [s]kip, q[uit]. [irSq]?: " opt
+      case $opt in
+         r|R)
+            chmod o-x $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo Executable by Group
+echo ================================================================================
+
+for f in $(find . -perm -g=x); do
+   if [[ -f $f && ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p "[i]gnore rule, [r]remove Exec group, [s]kip, q[uit]. [irSq]?: " opt
+      case $opt in
+         r|R)
+            chmod g-x $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo No header
+echo ================================================================================
+
+for f in $(find . -executable); do
+   if [[ -f $f && ! -L $f ]]; then
+      l2="$(cat $f | sed -n '2p')"
+      if [[ "${l2:0:10}" != "help_text=" ]]; then
+         echo --------------------------------------------------------------------------------
+         ls -al $f
+         echo
+         read -p "[i]gnore , [a]dd header, [s]kip, q[uit]. [iaSq]?: " opt
+         case $opt in
+            a|A)
+               tidytmp="/tmp/tidy.tmp"
+               echo "#!/bin/bash" > $tidytmp
+               echo 'help_text="' >> $tidytmp
+               echo "NAME" >> $tidytmp
+               echo "   ${f:2} - One line description." >> $tidytmp
+               echo "" >> $tidytmp
+               echo "USAGE" >> $tidytmp
+               echo "   ${f:2} [options] <parameters>" >> $tidytmp
+               echo "" >> $tidytmp
+               echo "OPTIONS" >> $tidytmp
+               echo "   -x" >> $tidytmp
+               echo "      Description..." >> $tidytmp
+               echo "" >> $tidytmp
+               echo "   -h|--help" >> $tidytmp
+               echo "      Show help text." >> $tidytmp
+               echo "" >> $tidytmp
+               echo "DESCRIPTION" >> $tidytmp
+               echo "   Description description description description." >> $tidytmp
+               echo "" >> $tidytmp
+               echo "AUTHOR" >> $tidytmp
+               echo "  mjnurse.uk 2020" >> $tidytmp
+               echo '"' >> $tidytmp
+               echo 'help_line="tbc"' >> $tidytmp
+               echo '' >> $tidytmp
+               tail +2 $f >> $tidytmp
+               cp -f $tidytmp $f
+               gvim $f
+               ;;
+            i|I)
+               break;;
+            q|Q)
+               exit;;
+         esac
+      fi
+   fi
+done
