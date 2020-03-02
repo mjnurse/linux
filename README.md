@@ -10,7 +10,7 @@ o - or:           Connect to oracle using sqlplus
 p - pg:           Connect to postgresql using psql 
 ```
 
-### h - help_line extraction script
+### h - help_line Extraction Script
 
 File: h
 ```
@@ -57,3 +57,4 @@ grep help_line= * | \
       s/: /:                 /;
       s/\(..................\) *\(.*\)/\1\2/; /tidy:.*echo/d' 
 ```
+
