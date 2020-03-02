@@ -28,7 +28,7 @@ echo -----------
 
 prev_chr=""
 grep help_line= * | \
-   sed '/^h:/d; s/help_line=//; s/"/ /g; /tidy:.*echo/d; /README.*md/d' | \
+   sed '/^h:/d; s/help_line=//; s/"/ /g; /tidy:.*echo/d; /^README.*md/d' | \
    sort | while IFS= read -r line ; do 
       curr_char="${line:0:1}"
       if [[ "$curr_char" != "$prev_char" ]]; then
