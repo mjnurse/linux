@@ -1,5 +1,7 @@
 # Linux Utility Scripts
 
+The following list of script descriptions is generated using the help_line extraction script.
+
 ```
 -----------
 help_lines:
