@@ -28,7 +28,7 @@ while read line; do
     if [[ "$line" =~ .*.js ]]; then
       echo '```javascript' >> README.md
     else
-      echo '```' >> README.md
+      echo '```bash' >> README.md
     fi
     cat $line >> README.md
     echo '```' >> README.md

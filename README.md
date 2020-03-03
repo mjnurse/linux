@@ -20,7 +20,7 @@ t - tidy:         Fixes issues such as permission issues with files in current d
 ### h - help_line Extraction Script
 
 File: h
-```
+```bash
 #!/bin/bash
 help_text="
 NAME
