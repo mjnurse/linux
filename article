@@ -26,37 +26,37 @@ params=$*
 
 # Prompt for the section
 
-cd /c/MJN/gdrive/web/content-mjnurse-uk
+cd /c/MJN/gdrive/web/content-mjnurse-uk || exit
 if [[ "$section_name" == "" ]]; then
    ls * | grep "articles" | sed "s/.articles.*//" > /tmp/article.tmp
-   section_num=1
+   ((section_num = 1))
    echo SECTIONS:
-   while read line; do
+   while read -r line; do
       echo "$section_num: $line"
-      let section_num=section_num+1
+      (( section_num=section_num + 1 ))
    done < /tmp/article.tmp
-   read -p "Select section: " chosen_num
+   read -rp "Select section: " chosen_num
    
    section_num=1
-   while read line; do
+   while read -r line; do
       if [[ "$section_num" == "$chosen_num" ]]; then
          section_name="$line"
       fi
-      let section_num=section_num+1
+      (( section_num = section_num + 1 ))
    done < /tmp/article.tmp
 fi
 
-ls /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles
+ls /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles
 filename=${section_name}.${params// /_}.article
 echo ------------------------------
-echo New File: $filename
+echo "New File: $filename"
 
-read -p "Create [yN]: " yn
+read -rp "Create [yN]: " yn
 
 if [ "${yn^}" == "Y" ]; then
-   echo "# ${params}" > /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles/$filename
-   cd /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles
-   gvim $filename
-   cd /c/MJN/gdrive/web/content-mjnurse-uk/${section_name}.articles
+   echo "# ${params}" > /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles/"$filename"
+   cd /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles || exit
+   gvim "$filename"
+   cd /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles || exit
    ls
 fi
