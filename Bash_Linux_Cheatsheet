@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Variables
+# VARIABLES
+# ---------
 
 ${#var}                # var length.
 ${var:-default}        # If missing use default.
@@ -35,7 +36,9 @@ echo ${arr[@]}   # Yields: Martin is cool ace
 echo ${arr[3]}   # Yields nothing
 echo ${arr[10]}  # Yields: ace
 
-# Files
+# --------------------------------------------------------------------------------
+
+# FILES
 
 if [[ -f $filename ]]; then "echo $filename exists"; fi
 
