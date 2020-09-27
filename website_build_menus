@@ -1,0 +1,151 @@
+#!/bin/bash
+# help_text="
+# NAME
+#    bm - One line description.
+
+# USAGE
+#    bm [options] <parameters>
+
+# OPTIONS
+#    -x
+#       Description...
+
+#    -h|--help
+#       Show help text.
+
+# DESCRIPTION
+#    Description description description description.
+
+# AUTHOR
+#   mjnurse.uk 2020
+# "
+# help_line="tbc"
+
+base_url="https://mjnurse.github.io"
+base_dir="/c/MJN/github/mjnurse-github-io"
+
+# Start the Front page
+echo --- > index.md
+{ echo "title: mjnurse.dev"; 
+  echo "layout: front"; 
+  echo "---"; } >> index.md
+
+echo "Some stuff that interests me or made me smile.  The scripts I write." \
+     " GCP, Hadoop, Oracle, SQL, Python, PostgreSQL, Scala, Teradata, AHK." \
+     " OK, I'm a geek - an **Entrprenerd**. Only good is good enough. " \
+     " \"I'll format it later\" - no you won't - find a new job." >> index.md
+echo "<a href=\"{{ site.url }}\"><b>MJN</b></a>" > _includes/menu-bar.html
+
+sed '/### NAV KEY MAPPINGS/q' assets/javascript/navigation.js \
+    > assets/javascript/nav.js
+
+# Start the ALL page
+all_page="${base_dir}/All-A/index.md"
+echo --- > $all_page
+{ echo "title: All Content"; 
+  echo "---"; } >> $all_page
+
+((l1_num = 1))
+((all_num = 0))
+
+# LOOP THROUGH TOP LEVEL FOLDERS
+# ------------------------------
+
+for l1_dir in */; do
+
+   if [[ "$l1_dir" != "*/" && "$l1_dir" != _layouts/ && "$l1_dir" != assets/ && \
+         "$l1_dir" != _includes/ && "$l1_dir" != images/ ]]; then
+
+      n=$(echo "$l1_dir" | sed "s/\///g; s/-.$//; s/_/ /g; s/\.md//")
+
+      # Add links to the front page
+      echo >> index.md
+      echo "<span style=\"color: grey\">$l1_num.</span>" \
+           "&nbsp;&nbsp;&nbsp;<a id=\"listitem$l1_num\"" \
+           "href=\"${l1_dir/.md/.html}\">${n}</a>" >> index.md
+
+      # Add links to the all page
+      echo >> $all_page
+      echo "<span style=\"color: grey\">$all_num.</span>&nbsp;&nbsp;&nbsp;" \
+           "<a id=\"listitem$all_num\"" \
+           "href=\"$base_url/${l1_dir/.md/.html}\">${n}</a>" \
+         | sed "s/All-A\///" >> $all_page
+      ((all_num = all_num + 1))
+
+      # Add link to the menu bar
+      char=$(echo "$l1_dir" | sed "s/.*-//; s/\///g")
+      name=$(echo "$l1_dir" | \
+         sed "s/\///g; s/${char}/<b>${char}<\/b>/; s/-.//; s/_/ /g")
+      echo "<a href=\"/${l1_dir}\">$name</a>" >> _includes/menu-bar.html
+
+      # Add  key press to navigate javascript
+      echo "case \"$char\": window.location.assign( \"/${l1_dir}\" ); break;" \
+         >> assets/javascript/nav.js
+
+      # MOVE INTO TOP LEVEL FOLDER
+      # --------------------------
+      cd "$l1_dir" || exit
+
+      #  Start the top level folder index page
+      echo --- > index.md
+      { echo "title: ${n//_/ }";
+        echo "---"; } >> index.md
+
+      ((l2_num = 1))
+
+      # LOOP THROUGH CHILD FOLDERS
+      # --------------------------
+      for l2_dir in */; do
+         if [[ "$l2_dir" != "*/" && $l2_dir != images/ ]]; then
+            n=$(echo "$l2_dir" | sed "s/\///g; s/_/ /g; s/\.md//")
+
+            # Add child folder link to the top level folder index
+            echo >> index.md
+            echo "<span style=\"color: grey\">$l2_num.</span>&nbsp;&nbsp;&nbsp;" \
+                 "<b><a id=\"listitem$l2_num\" href=\"${l2_dir/.md/.html}\">$n</a></b>" >> index.md
+
+            # Add child folder link to the all folder index
+            echo >> $all_page
+            echo "<span style=\"color: grey\">&nbsp;&nbsp;&nbsp;$all_num.</span>&nbsp;&nbsp;&nbsp;" \
+                 "<a id=\"listitem$all_num\" href=\"${l2_dir/.md/.html}\">$n</a>" \
+               | sed "s/All-A\///" >> $all_page
+
+            ((all_num = all_num + 1))
+
+            # MOVE INTO 2ND LEVEL FOLDER
+            # --------------------------
+
+            cd "$l2_dir" || exit
+            echo --- > index.md
+            { echo "title: ${n//_/ }";
+              echo "---"; } >> index.md
+
+            ((num3 = 1))
+            for x in *.md; do
+               if [[ $x != index.md ]]; then
+                  n="${x/.md/}"
+                  n=$(echo "$x" | sed "s/\///g; s/_/ /g; s/\.md//")
+                  echo >> index.md
+                  echo "<span style=\"color: grey\">$num3.</span>&nbsp;&nbsp;&nbsp;<a id=\"listitem$num3\" href=\"${x/.md/.html}\">$n</a>" >> index.md
+                  ((num3 = num3 + 1))
+               fi
+            done
+            cd ..
+            ((l2_num = l2_num + 1))
+         fi
+      done
+
+      for f in *.md; do
+         if [[ $f != index.md ]]; then
+            n=$(echo "$f" | sed "s/\///g; s/_/ /g; s/\.md//")
+            echo >> index.md
+            echo "<span style=\"color: grey\">$l2_num.</span>&nbsp;&nbsp;&nbsp;<a id=\"listitem$l2_num\" href=\"${f/.md/.html}\">$n</a>" >> index.md
+            ((l2_num = l2_num + 1))
+         fi
+      done
+      cd ..
+   fi
+   ((l1_num = l1_num + 1))
+done
+
+sed -e '1,/### NAV KEY MAPPINGS/ d' assets/javascript/navigation.js >> assets/javascript/nav.js
