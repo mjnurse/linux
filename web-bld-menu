@@ -19,11 +19,13 @@
 # AUTHOR
 #   mjnurse.uk 2020
 # "
-# help_line="tbc"
+help_line="Generates Website Menu Pages"
+desc_line="Generates Website Menu Pages"
 
 base_url="https://mjnurse.github.io"
 base_dir="/c/MJN/github/mjnurse-github-io"
 
+cd $base_dir
 # Start the Front page
 echo --- > index.md
 { echo "title: mjnurse.dev"; 
@@ -36,8 +38,7 @@ echo "Some stuff that interests me or made me smile.  The scripts I write." \
      " \"I'll format it later\" - no you won't - find a new job." >> index.md
 echo "<a href=\"{{ site.url }}\"><b>MJN</b></a>" > _includes/menu-bar.html
 
-sed '/### NAV KEY MAPPINGS/q' assets/javascript/navigation.js \
-    > assets/javascript/nav.js
+sed '/### NAV KEY MAPPINGS/q' assets/javascript/navigation.js > assets/javascript/nav.js
 
 # Start the ALL page
 all_page="${base_dir}/All-A/index.md"
@@ -56,26 +57,25 @@ for l1_dir in */; do
    if [[ "$l1_dir" != "*/" && "$l1_dir" != _layouts/ && "$l1_dir" != assets/ && \
          "$l1_dir" != _includes/ && "$l1_dir" != images/ ]]; then
 
+      echo $l1_dir
+
       n=$(echo "$l1_dir" | sed "s/\///g; s/-.$//; s/_/ /g; s/\.md//")
 
       # Add links to the front page
       echo >> index.md
       echo "<span style=\"color: grey\">$l1_num.</span>" \
-           "&nbsp;&nbsp;&nbsp;<a id=\"listitem$l1_num\"" \
-           "href=\"${l1_dir/.md/.html}\">${n}</a>" >> index.md
+           "&nbsp;&nbsp;&nbsp;<a id=\"listitem$l1_num\" href=\"/${l1_dir}\">${n}</a>" >> index.md
 
       # Add links to the all page
       echo >> $all_page
       echo "<span style=\"color: grey\">$all_num.</span>&nbsp;&nbsp;&nbsp;" \
-           "<a id=\"listitem$all_num\"" \
-           "href=\"$base_url/${l1_dir/.md/.html}\">${n}</a>" \
+           "<a id=\"listitem$all_num\" href=\"$base_url/${l1_dirl}\">${n}</a>" \
          | sed "s/All-A\///" >> $all_page
       ((all_num = all_num + 1))
 
       # Add link to the menu bar
       char=$(echo "$l1_dir" | sed "s/.*-//; s/\///g")
-      name=$(echo "$l1_dir" | \
-         sed "s/\///g; s/${char}/<b>${char}<\/b>/; s/-.//; s/_/ /g")
+      name=$(echo "$l1_dir" | sed "s/\///g; s/${char}/<b>${char}<\/b>/; s/-.//; s/_/ /g")
       echo "<a href=\"/${l1_dir}\">$name</a>" >> _includes/menu-bar.html
 
       # Add  key press to navigate javascript
@@ -96,19 +96,25 @@ for l1_dir in */; do
       # LOOP THROUGH CHILD FOLDERS
       # --------------------------
       for l2_dir in */; do
+
+
          if [[ "$l2_dir" != "*/" && $l2_dir != images/ ]]; then
+
+            echo "   $l2_dir"
+
             n=$(echo "$l2_dir" | sed "s/\///g; s/_/ /g; s/\.md//")
 
             # Add child folder link to the top level folder index
             echo >> index.md
             echo "<span style=\"color: grey\">$l2_num.</span>&nbsp;&nbsp;&nbsp;" \
-                 "<b><a id=\"listitem$l2_num\" href=\"${l2_dir/.md/.html}\">$n</a></b>" >> index.md
+                 "<b><a id=\"listitem$l2_num\" href=\"/${l1_dir}${l2_dir}\">$n</a></b>" >> index.md
 
             # Add child folder link to the all folder index
             echo >> $all_page
-            echo "<span style=\"color: grey\">&nbsp;&nbsp;&nbsp;$all_num.</span>&nbsp;&nbsp;&nbsp;" \
-                 "<a id=\"listitem$all_num\" href=\"${l2_dir/.md/.html}\">$n</a>" \
-               | sed "s/All-A\///" >> $all_page
+            echo "<span style=\"color: grey\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" \
+                 "$all_num.</span>&nbsp;&nbsp;" \
+                 "&nbsp;<a id=\"listitem$all_num\" href=\"/${l1_dir}${l2_dir}\">$n</a>" \
+                 | sed "s/All-A\///" >> $all_page
 
             ((all_num = all_num + 1))
 
@@ -120,29 +126,48 @@ for l1_dir in */; do
             { echo "title: ${n//_/ }";
               echo "---"; } >> index.md
 
-            ((num3 = 1))
-            for x in *.md; do
-               if [[ $x != index.md ]]; then
-                  n="${x/.md/}"
-                  n=$(echo "$x" | sed "s/\///g; s/_/ /g; s/\.md//")
+            ((l3_num = 1))
+            scripts=n
+            for file in $(ls *.md | sed "s/^Script/zzzScript/" | sort -f | sed "s/^zzz//"); do
+               if [[ $file =~ Script.* && $scripts == n ]]; then
                   echo >> index.md
-                  echo "<span style=\"color: grey\">$num3.</span>&nbsp;&nbsp;&nbsp;<a id=\"listitem$num3\" href=\"${x/.md/.html}\">$n</a>" >> index.md
-                  ((num3 = num3 + 1))
+                  echo "## Scripts" >> index.md
+                  echo >> index.md
+                  scripts=y
+               fi
+               if [[ $file != index.md ]]; then
+                  n=$(echo "$file" | sed "s/\///g; s/_/ /g; s/\.md//; s/^Script //")
+                  echo >> index.md
+                  echo "<span style=\"color: grey\">$l3_num.</span>&nbsp;&nbsp;" \
+                     "&nbsp;<a id=\"listitem$l3_num\" href=\"${file/.md/.html}\">$n</a>" >> index.md
+                  ((l3_num = l3_num + 1))
                fi
             done
+            echo "      - $l3_num"
             cd ..
             ((l2_num = l2_num + 1))
          fi
       done
 
-      for f in *.md; do
-         if [[ $f != index.md ]]; then
-            n=$(echo "$f" | sed "s/\///g; s/_/ /g; s/\.md//")
+      scripts=n
+      for file in $(ls *.md | sed "s/^Script/zzzScript/" | sort -f | sed "s/^zzz//"); do
+         if [[ $file =~ Script.* && $scripts == n ]]; then
             echo >> index.md
-            echo "<span style=\"color: grey\">$l2_num.</span>&nbsp;&nbsp;&nbsp;<a id=\"listitem$l2_num\" href=\"${f/.md/.html}\">$n</a>" >> index.md
+            echo "## Scripts" >> index.md
+            echo >> index.md
+            scripts=y
+         fi
+         if [[ $file != index.md ]]; then
+            n=$(echo "$file" | sed "s/\///g; s/_/ /g; s/\.md//; s/^Script //")
+            echo >> index.md
+            echo "<span style=\"color: grey\">$l2_num.</span>&nbsp;&nbsp;&nbsp;" \
+                 "<a id=\"listitem$l2_num\" href=\"${file/.md/.html}\">$n</a>" >> index.md
             ((l2_num = l2_num + 1))
          fi
       done
+
+      echo "   - $l2_num pages"
+
       cd ..
    fi
    ((l1_num = l1_num + 1))

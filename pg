@@ -20,6 +20,7 @@ AUTHOR
   mjnurse.uk 2020
 "
 help_line="Connect to postgresql using psql"
+desc_line="Connect to postgresql using psql"
 
 export PGPASSWORD=postgres
 

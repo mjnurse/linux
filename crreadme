@@ -13,6 +13,7 @@ AUTHOR
   mjnurse.uk 2020
 "
 help_line="Creates a README.md document from READMEscr.md"
+desc_line="Creates a README.md document from READMEscr.md"
 
 mv -f README.md /tmp
 

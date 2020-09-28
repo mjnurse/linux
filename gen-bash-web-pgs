@@ -1,0 +1,37 @@
+#!/bin/bash
+help_text="
+NAME
+   gen_bash_web_pgs - Creates webs pages for bash scripts
+
+USAGE
+   gen_bash_web_pgs
+
+DESCRIPTION
+   Creates webs pages for bash scripts.
+
+AUTHOR
+  mjnurse.uk 2020
+"
+help_line="Creates webs pages for bash scripts"
+desc_line="Creates webs pages for bash scripts"
+
+rm -f /c/MJN/github/mjnurse-github-io/Bash-B/Script*
+
+cd /c/MJN/github/bash
+for f in $(grep -l "^desc_line" *); do
+
+   dl="$(grep '^desc_line=' $f | sed 's/desc_line=*//; s/ *$//; s/"//g')"
+
+   dest=$(echo "/c/MJN/github/mjnurse-github-io/Bash-B/Script $f - $dl.md" | sed "s/ /_/g")
+
+   echo $dest
+
+   echo "---" > $dest
+   echo "title: $f - $dl" >> $dest
+   echo "---" >> $dest
+   echo "" >> $dest
+   echo "\`\`\`bash" >> $dest
+   cat $f >> $dest
+   echo "\`\`\`" >> $dest
+done
+

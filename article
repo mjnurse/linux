@@ -9,7 +9,8 @@ USAGE
 DESCRIPTION
    A basic script to create a new article.
 "
-help_line="Creates a new website article: article <title: spaces allowed>"
+help_line="Creates a new website article: article <title - can use spaces>"
+desc_line="Creates a new website article"
 
 if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
    echo "$help_text"
@@ -26,9 +27,11 @@ params=$*
 
 # Prompt for the section
 
-cd /c/MJN/gdrive/web/content-mjnurse-uk || exit
+cd /c/MJN/github/mjnurse-github-io || exit
 if [[ "$section_name" == "" ]]; then
-   ls * | grep "articles" | sed "s/.articles.*//" > /tmp/article.tmp
+   find . -type d -print | sed "s/^\.//; /^\/[^A-Z]/d; /images$/d; /All-A/d; /^$/d" \
+      > /tmp/article.tmp
+
    ((section_num = 1))
    echo SECTIONS:
    while read -r line; do
@@ -37,7 +40,7 @@ if [[ "$section_name" == "" ]]; then
    done < /tmp/article.tmp
    read -rp "Select section: " chosen_num
    
-   section_num=1
+   ((section_num = 1))
    while read -r line; do
       if [[ "$section_num" == "$chosen_num" ]]; then
          section_name="$line"
@@ -46,17 +49,18 @@ if [[ "$section_name" == "" ]]; then
    done < /tmp/article.tmp
 fi
 
-ls /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles
-filename=${section_name}.${params// /_}.article
+cd /c/MJN/github/mjnurse-github-io/"${section_name}"
+ls | sort -f
+filename=${params// /_}.md
 echo ------------------------------
 echo "New File: $filename"
 
 read -rp "Create [yN]: " yn
 
 if [ "${yn^}" == "Y" ]; then
-   echo "# ${params}" > /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles/"$filename"
-   cd /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles || exit
+   echo "---" > "$filename"
+   echo "title: ${params}" >> "$filename"
+   echo "layout: page-with-contents-list" >> "$filename"
+   echo "---" >> "$filename"
    gvim "$filename"
-   cd /c/MJN/gdrive/web/content-mjnurse-uk/"${section_name}".articles || exit
-   ls
 fi

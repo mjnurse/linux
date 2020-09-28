@@ -11,12 +11,14 @@ DESCRIPTION
 "
 
 help_line="Fixes issues such as permission issues with files in current directory"
+desc_line="Fixes eg permission issues with files"
 
 echo ================================================================================
 echo Executable but not '#!/bin/bash'
 echo ================================================================================
 
 for f in $(find . -maxdepth 1 -executable); do
+
    if [[ -f $f && ! -L $f ]]; then
       line1="$(head -1 $f)"
       line1=${line1//[$' \t\r\n']}
@@ -195,6 +197,7 @@ for f in $(find . -maxdepth 1 -executable); do
                echo "  mjnurse.uk 2020" >> $tidytmp
                echo '"' >> $tidytmp
                echo 'help_line="tbc"' >> $tidytmp
+               echo 'desc_line="tbc"' >> $tidytmp
                echo '' >> $tidytmp
                tail +2 $f >> $tidytmp
                cp -f $tidytmp $f

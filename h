@@ -12,14 +12,15 @@ DESCRIPTION
 AUTHOR
   mjnurse.uk 2020
 "
-help_line="This script"
+help_line="Extracts and displays the help_lines"
+desc_line="Extracts and displays the help_lines"
 
-no_help_list="$(grep -L help_line= * | sed '/README.*.md/d')"
-if [[ "$no_help_list" != "" ]]; then
+grep -L help_line= * | sed '/README.*.md/d' | sort -f > /tmp/h.tmp
+if [[ $(cat /tmp/h.tmp | wc -l) != 0 ]]; then
    echo -------------
    echo No help_line:
    echo -------------
-   echo $no_help_list
+   cat /tmp/h.tmp
 fi
 
 echo -----------
@@ -38,5 +39,5 @@ grep help_line= * | \
          echo "    $line" 
       fi
    done | sed  '
-      s/: /:                 /;
-      s/\(..................\) *\(.*\)/\1\2/; /tidy:.*echo/d' 
+      s/: /:                  /;
+      s/\(...................\) *\(.*\)/\1\2/; /tidy:.*echo/d' 
