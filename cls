@@ -10,7 +10,7 @@ DESCRIPTION
    Clear terminal and putty terminal buffer.
 
 AUTHOR
-   mjnurse.uk - 2019
+   mjnurse.dev - 2019
 "
 help_line="Clear terminal and putty terminal buffer"
 desc_line="Clear terminal and putty terminal buffer"

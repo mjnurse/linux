@@ -10,12 +10,12 @@ DESCRIPTION
    Extracts and displays the (single line) help lines.
 
 AUTHOR
-  mjnurse.uk 2020
+  mjnurse.dev - 2020
 "
 help_line="Extracts and displays the help_lines"
 desc_line="Extracts and displays the help_lines"
 
-grep -L help_line= * | sed '/README.*.md/d' | sort -f > /tmp/h.tmp
+grep -L -e "^help_line=" -e "^-- help_line:" * | sed '/README.*.md/d' | sort -f > /tmp/h.tmp
 if [[ $(cat /tmp/h.tmp | wc -l) != 0 ]]; then
    echo -------------
    echo No help_line:
@@ -28,8 +28,8 @@ echo help_lines:
 echo -----------
 
 prev_chr=""
-grep help_line= * | \
-   sed '/^h:/d; s/help_line=//; s/"/ /g; /tidy:.*echo/d; /^README.*md/d' | \
+grep -e "^help_line=" -e "^-- help_line:" * | \
+   sed '/^h:/d; s/help_line=//; s/-- help_line://; s/"/ /g; /tidy:.*echo/d; /^README.*md/d' | \
    sort | while IFS= read -r line ; do 
       curr_char="${line:0:1}"
       if [[ "$curr_char" != "$prev_char" ]]; then
@@ -40,4 +40,5 @@ grep help_line= * | \
       fi
    done | sed  '
       s/: /:                  /;
-      s/\(...................\) *\(.*\)/\1\2/; /tidy:.*echo/d' 
+      s/\(...................\) *\(.*\)/\1\2/; /tidy:.*echo/d' > .h.out
+cat .h.out

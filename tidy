@@ -8,6 +8,9 @@ USAGE
 
 DESCRIPTION
    Fixes issues such as permission issues with files in current directory.
+
+AUTHOR
+   mjnurse.dev - 2020
 "
 
 help_line="Fixes issues such as permission issues with files in current directory"
@@ -194,7 +197,7 @@ for f in $(find . -maxdepth 1 -executable); do
                echo "   Description description description description." >> $tidytmp
                echo "" >> $tidytmp
                echo "AUTHOR" >> $tidytmp
-               echo "  mjnurse.uk 2020" >> $tidytmp
+               echo "  mjnurse.dev - 2020" >> $tidytmp
                echo '"' >> $tidytmp
                echo 'help_line="tbc"' >> $tidytmp
                echo 'desc_line="tbc"' >> $tidytmp

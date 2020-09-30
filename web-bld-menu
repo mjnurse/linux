@@ -17,7 +17,7 @@
 #    Description description description description.
 
 # AUTHOR
-#   mjnurse.uk 2020
+#   mjnurse.dev - 2020
 # "
 help_line="Generates Website Menu Pages"
 desc_line="Generates Website Menu Pages"
@@ -69,7 +69,7 @@ for l1_dir in */; do
       # Add links to the all page
       echo >> $all_page
       echo "<span style=\"color: grey\">$all_num.</span>&nbsp;&nbsp;&nbsp;" \
-           "<a id=\"listitem$all_num\" href=\"$base_url/${l1_dirl}\">${n}</a>" \
+           "<a id=\"listitem$all_num\" href=\"$base_url/${l1_dir}\">${n}</a>" \
          | sed "s/All-A\///" >> $all_page
       ((all_num = all_num + 1))
 
