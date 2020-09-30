@@ -1,0 +1,12 @@
+dir="/c/MJN/github/oracle"
+rme="$dir/README.md"
+
+echo "# Oracle Scripts" > $rme
+echo "" >> $rme
+
+cd $dir
+for f in $(grep -l -e "-- *desc_line:" * ); do
+   cat $f | sed -n '/^-- *desc_line:/p;' | sed 's/-- *desc_line: *//; s/"//g' \
+       | sed "s/^/- [**$f**](https:\/\/github.com\/mjnurse\/oracle\/blob\/master\/$f) - /" >> $rme
+   echo "" >> $rme
+done
