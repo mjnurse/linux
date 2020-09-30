@@ -5,6 +5,6 @@ echo "" >> $rme
 
 for f in $(grep -l -e "desc_line=" *); do
    cat $f | sed -n '/^desc_line=/p;' | sed 's/desc_line=//; s/"//g' \
-      | sed "s/^/- *$f* - /" >> $rme
+      | sed "s/^/- **$f** - /" >> $rme
    echo "" >> $rme
 done
