@@ -1,27 +1,27 @@
 # Bash Scripts
 
-- *ah* - Add header to web page markdown document
+- **ah** - Add header to web page markdown document
 
-- *article* - Creates a new website article
+- **article** - Creates a new website article
 
-- *cls* - Clear terminal and putty terminal buffer
+- **cls** - Clear terminal and putty terminal buffer
 
-- *crreadme* - Creates a README.md document from READMEscr.md
+- **crreadme** - Creates a README.md document from READMEscr.md
 
 
-- *gen-bash-web-pgs* - Creates webs pages for bash scripts
+- **gen-bash-web-pgs** - Creates webs pages for bash scripts
 
-- *gen-ora-web-pgs* - Creates web pages for Oracle scripts
+- **gen-ora-web-pgs** - Creates web pages for Oracle scripts
 
-- *gvim* - Runs windows gvim and fixes file paths
+- **gvim** - Runs windows gvim and fixes file paths
 
-- *h* - Extracts and displays the help_lines
+- **h** - Extracts and displays the help_lines
 
-- *or* - Connect to oracle using sqlplus
+- **or** - Connect to oracle using sqlplus
 
-- *pg* - Connect to postgresql using psql
+- **pg** - Connect to postgresql using psql
 
-- *tidy* - Fixes eg permission issues with files
+- **tidy** - Fixes eg permission issues with files
 
-- *web-bld-menu* - Generates Website Menu Pages
+- **web-bld-menu** - Generates Website Menu Pages
 
