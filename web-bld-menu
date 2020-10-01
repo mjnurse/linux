@@ -19,8 +19,8 @@
 # AUTHOR
 #   mjnurse.dev - 2020
 # "
-help_line="Generates Website Menu Pages"
-desc_line="Generates Website Menu Pages"
+help_line="Generates website menu pages"
+desc_line="Generates website menu pages"
 
 base_url="https://mjnurse.github.io"
 base_dir="/c/MJN/github/mjnurse-github-io"

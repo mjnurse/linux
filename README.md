@@ -23,5 +23,5 @@
 
 - [**tidy**](https://github.com/mjnurse/bash/blob/master/tidy) - Fixes eg permission issues with files
 
-- [**web-bld-menu**](https://github.com/mjnurse/bash/blob/master/web-bld-menu) - Generates Website Menu Pages
+- [**web-bld-menu**](https://github.com/mjnurse/bash/blob/master/web-bld-menu) - Generates website menu pages
 
