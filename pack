@@ -1,0 +1,65 @@
+#!/bin/bash
+help_text="
+NAME
+  pack - Compresses and converts files base64 to copy / paste into a command line session. 
+
+USAGE
+  pack [options] <filename(s)>
+
+OPTIONS
+  -h|--help
+    Show help text.
+
+DESCRIPTION
+  Compresses one or more files and converts these to base64 to copy and paste into a command
+  line session.
+
+AUTHOR
+  mjnurse.dev - 2020
+"
+help_line="Compresses and converts files base64 to copy / paste into a command line session"
+web_desc_line="Compresses and converts files base64 to copy / paste into a command line session"
+
+try="Try ${0##*/} -h for more information"
+tmp="${help_text##*USAGE}"
+usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
+
+tmp=/tmp/pack.tmp
+line="-------------------------------------------------"; line="# $line$line"
+
+if [[ "$1" == "" ]]; then
+  echo "${usage}"
+  echo "${try}"
+  exit 1
+fi
+
+if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
+   echo "$help_text"
+   exit
+fi
+
+if [[ $# == 1 ]]; then
+  multi_yn=n
+  out="$1.pack"
+  rm -f $out
+else
+  multi_yn=y
+  multi_yn=n
+  out="multi.pack"
+  rm -f $out
+  echo "$line" >> $out
+  files="$*"
+  echo "# ITINERARY: ${files// /, }" | fold -w 100 -s >> $out
+  echo "$line" >> $out
+fi
+
+for f in $*; do
+  if [[ "$f" != "pack" ]]; then
+    echo "FILE=$f; echo '" >> $out
+    cat $f | gzip -f | base64 --wrap=100 >> $out
+    echo "' | base64 -d | gunzip > $f; chmod u+x $f" >> $out
+  fi
+done
+
+cat $out
+

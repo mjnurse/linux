@@ -1,0 +1,23 @@
+a - ah:                  Add header to web page markdown document 
+    article:             Creates a new website article: article <title: spaces allowed> 
+b - blog:                Creates a Blog article: blog <title: spaces allowed> 
+c - calc:                Command line calculator 
+    cls:                 Clear terminal and putty terminal buffer 
+    crreadme:            Creates a README.md document from READMEscr.md 
+    csv-plot:            Generates a HTML page containing a Google Chart plotting the csv data 
+f - file-mail:           Move images of mail from Google Scanner a chosen folder 
+    file-watch:          Watch a file and each time it is modified run a command 
+    filename-cleanse:    Rename files to only lowercase characters and a dash. 
+g - gen-bash-readme:     Create a README.md for the bash scripts repo 
+    gen-bash-web-pgs:    Creates webs pages for bash scripts 
+    gen-ora-web-pgs:     Creates web pages for Oracle scripts 
+    gen-web-menus:       Generates website menu pages 
+    gvim:                Runs windows gvim and fixes file paths 
+l - lf:                  A script to recursively list folders and show folder details 
+o - or:                  Connect to oracle using sqlplus 
+p - pack:                Compresses and converts files base64 to copy / paste into a command line session 
+    pg:                  Connect to postgresql using psql 
+s - sck:                 Query shortcut keys.  Options to add, edit, delete. 
+    script-template:     A script containing an example script-template 
+    sqlite-load-csv:     Load a csv file into a sqlite3 database 
+t - tidy:                Fixes issues such as permission issues with files in current directory 

@@ -1,0 +1,80 @@
+#!/bin/bash
+help_text="
+NAME
+   doit - One line description.
+
+USAGE
+   doit [options] <parameters>
+
+OPTIONS
+   -x
+      Description...
+
+   -h|--help
+      Show help text.
+
+DESCRIPTION
+   Description description description description.
+
+AUTHOR
+  mjnurse.dev - 2020
+"
+help_line="tbc"
+web_desc_line="tbc"
+
+try="Try ${0##*/} -h for more information"
+tmp="${help_text##*USAGE}"
+usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
+
+if [[ "$1" == "" ]]; then
+  echo "${usage}"
+  echo "${try}"
+  exit 1
+fi
+
+if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
+   echo "$help_text"
+   exit
+fi
+
+clear
+
+echo '  __________________________________________________________________________________________ '
+echo ' |  _____   ____      _____  ____  __  __ ______ _______ _    _ _____ _   _  _____   _   _  |'
+echo ' | |  __ \ / __ \    / ____|/ __ \|  \/  |  ____|__   __| |  | |_   _| \ | |/ ____| | | | | |'
+echo ' | | |  | | |  | |  | (___ | |  | | \  / | |__     | |  | |__| | | | |  \| | |  __  | | | | |'
+echo ' | | |  | | |  | |   \___ \| |  | | |\/| |  __|    | |  |  __  | | | | . ` | | |_ | | | | | |'
+echo ' | | |__| | |__| |   ____) | |__| | |  | | |____   | |  | |  | |_| |_| |\  | |__| | |_| |_| |'
+echo ' | |_____/ \____/   |_____/ \____/|_|  |_|______|  |_|  |_|  |_|_____|_| \_|\_____| (_) (_) |'
+echo ' |__________________________________________________________________________________________|'
+
+dte="$(date +'%y/%m/%d-%H:00')"
+
+repeat_yn=y
+
+while [[ ${repeat_yn} == y ]]; do
+  echo
+  read -p "What did you do? " did
+  echo
+  echo "${dte} - ${did}"
+  echo
+  read -p "Save [yN] " yn
+  if [[ $yn == y ]]; then
+    repeat_yn=n
+  fi
+done
+
+i_did="/c/MJN/gdrive/i-did.txt"
+
+echo "${dte} - ${did}" >> ${i_did}
+
+echo
+cat ${i_did}
+
+echo
+read -p "Press RTN to close (e RTN to edit I did) " v
+
+if [[ "${v}" == "e" ]]; then
+  gvim ${i_did}
+fi
+

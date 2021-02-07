@@ -1,0 +1,43 @@
+#!/bin/bash
+help_text="
+NAME
+   rh - One line description.
+
+USAGE
+   rh [options] <parameters>
+
+OPTIONS
+   -x
+      Description...
+
+   -h|--help
+      Show help text.
+
+DESCRIPTION
+   Description description description description.
+
+AUTHOR
+  mjnurse.dev - 2020
+"
+help_line="tbc"
+
+url=$(cat .git/config | grep url | sed "s/.*url = //")
+
+echo Removing git History
+echo
+echo repo=\"$url\"
+echo
+
+read -p "Press RTN to continue"
+
+rm -rf .git
+
+git init
+
+git add .
+
+git commit -m "Initial commit"
+
+git remote add origin $url
+
+git push -u --force origin master
