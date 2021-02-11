@@ -24,6 +24,7 @@ AUTHOR
 "
 help_line="Command line calculator"
 web_desc_line="Command line calculator"
+pack_member="default"
 
 try="Try ${0##*/} -h for more information"
 tmp="${help_text##*USAGE}"

@@ -17,4 +17,5 @@ web_desc_line="Connect to oracle using sqlplus"
 
 export ORACLE_PATH=.:/c/MJN/gdrive/code/oracle:/c/MJN/gdrive/code/private/oracle
 
-rlwrap sqlplus /NOLOG
+rlwrap /c/MJN/oracle_client/product/11.2.0/client_1/bin/sqlplus.exe /NOLOG
+#rlwrap sqlplus /NOLOG

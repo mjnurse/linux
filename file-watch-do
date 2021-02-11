@@ -1,19 +1,20 @@
 #!/bin/bash
 help_text="
 NAME
-  file-watch - Watch a file and each time it is modified run a command.
+  file-watch-do - Watch a file and each time it is modified run a command.
 
 USAGE
-   file-watch <file name> <command> [<command parameters>]
+  file-watch-do <file name> <command> [<command parameters>]
 
 DESCRIPTION
-   Watch a file and each time it is modified run a command.
+  Watch a file and each time it is modified run a command.
 
 AUTHOR
-   mjnurse.uk - 2019
+  mjnurse.uk - 2019
 "
 help_line="Watch a file and each time it is modified run a command"
 web_desc_line="Watch a file and each time it is modified run a command"
+pack_member="default"
 
 name=${0/\.\/}
 try="Try '$name -h' for more information"
