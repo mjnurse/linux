@@ -10,7 +10,7 @@ DESCRIPTION
   Watch a file and each time it is modified run a command.
 
 AUTHOR
-  mjnurse.uk - 2019
+  mjnurse.dev - 2019
 "
 help_line="Watch a file and each time it is modified run a command"
 web_desc_line="Watch a file and each time it is modified run a command"

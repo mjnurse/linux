@@ -1,13 +1,13 @@
 #!/bin/bash
 help_text="
 NAME
-   crreadme - Creates a README.md document from READMEscr.md
+  crreadme - Creates a README.md document from READMEscr.md
 
 USAGE
-   crreadme <READMEscr.md document name>
+  crreadme <READMEscr.md document name>
 
 DESCRIPTION
-   Creates a README.md document from READMEscr.md
+  Creates a README.md document from READMEscr.md
 
 AUTHOR
   mjnurse.dev - 2020

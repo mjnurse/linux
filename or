@@ -1,10 +1,10 @@
 #!/bin/bash
 help_text="
 NAME
-   or - Connect to oracle using sqlplus.
+  or - Connect to oracle using sqlplus.
 
 USAGE
-   or
+  or
 
 DESCRIPTION
   Connect to oracle using sqlplus.

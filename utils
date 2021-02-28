@@ -1,20 +1,20 @@
 #!/bin/bash
 help_text="
 NAME
-   utils - One line description.
+  utils - One line description.
 
 USAGE
-   utils [options] <parameters>
+  utils [options] <parameters>
 
 OPTIONS
-   -x
-      Description...
+  -x
+    Description...
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Description description description description.
 
 AUTHOR
   mjnurse.dev - 2020

@@ -1,20 +1,20 @@
 #!/bin/bash
 help_text="
 NAME
-   find-large-files - One line description.
+  find-large-files - One line description.
 
 USAGE
-   find-large-files [options] <parameters>
+  find-large-files [options] <parameters>
 
 OPTIONS
-   -x
-      Description...
+  -x
+    Description...
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Description description description description.
 
 AUTHOR
   mjnurse.dev - 2020

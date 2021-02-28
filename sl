@@ -1,23 +1,23 @@
 #!/bin/bash
 help_text="
 NAME
-   sl - One line description.
+  sl - One line description.
 
 USAGE
-   sl [options] <parameters>
+  sl [options] <parameters>
 
 OPTIONS
-   -x
-      Description...
+  -x
+    Description...
 
-   -d|--debug
-      Run in debug mode.
+  -d|--debug
+    Run in debug mode.
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Description description description description.
 
 AUTHOR
   mjnurse.dev - 2020

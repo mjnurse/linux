@@ -1,29 +1,29 @@
 #!/bin/bash
 help_text="
 NAME
-   csv-plot - Generates a HTML page containing a Google Chart plotting the csv data.
+  csv-plot - Generates a HTML page containing a Google Chart plotting the csv data.
 
 USAGE
-   csv-plot [options] <csv filename>
+  csv-plot [options] <csv filename>
 
 OPTIONS
-   -f|--fontsize
-      The font size for the chart
+  -f|--fontsize
+    The font size for the chart
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
-   -s|--smooth
-      Adds smoothing to the plotted line.
+  -s|--smooth
+    Adds smoothing to the plotted line.
 
-   -x|--xaxis|--haxis <name>
-      sets the xaxis / haxis.
+  -x|--xaxis|--haxis <name>
+    sets the xaxis / haxis.
 
-   -y|--yaxis|--vaxis <name>
-      sets the yaxis / vaxis.
+  -y|--yaxis|--vaxis <name>
+    sets the yaxis / vaxis.
 
 DESCRIPTION
-   Generates a HTML page containing a Google Chart plotting the csv data.
+  Generates a HTML page containing a Google Chart plotting the csv data.
 
 AUTHOR
   mjnurse.dev - 2020

@@ -39,7 +39,7 @@ files="00000000000000000 $files"
 
 if [[ $matches_only_yn == n ]]; then
 
-  grep -s -L -e "^help_line=" -e "^-- help_line:" $files \
+  grep --exclude-dir="*" -s -L -e "^help_line=" -e "^-- help_line:" $files \
       | sed '/README.*.md/d; /^h:/d' \
       | sort -f > /tmp/h.tmp
 
@@ -84,3 +84,4 @@ grep -s -e "^help_line=" -e "^-- help_line:" $files | \
     s/: /:                        /;
     s/\(.........................\) *\(.*\)/\1\2/; /tidy:.*echo/d' > .h.out
 cat .h.out
+rm -f .h.out

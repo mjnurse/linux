@@ -1,13 +1,13 @@
 #!/bin/bash
 help_text="
 NAME
-   ah - Add header to web page markdown document
+  ah - Add header to web page markdown document
 
 USAGE
-   ah <Web page markdown document>
+  ah <Web page markdown document>
 
 DESCRIPTION
-   Add header to web page markdown document.
+  Add header to web page markdown document.
 
 AUTHOR
   mjnurse.dev - 2020

@@ -1,20 +1,20 @@
 #!/bin/bash
 help_text="
 NAME
-   gen-search-doc-list - One line description.
+  gen-search-doc-list - One line description.
 
 USAGE
-   gen-search-doc-list [options] <parameters>
+  gen-search-doc-list [options] <parameters>
 
 OPTIONS
-   -x
-      Description...
+  -x
+    Description...
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Description description description description.
 
 AUTHOR
   mjnurse.dev - 2020

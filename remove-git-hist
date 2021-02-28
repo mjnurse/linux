@@ -1,20 +1,17 @@
 #!/bin/bash
 help_text="
 NAME
-   rh - One line description.
+  remove-git-hist - Removes a local git, initialises a new git, adds all files with no history.
 
 USAGE
-   rh [options] <parameters>
+  remove-git-hist
 
 OPTIONS
-   -x
-      Description...
-
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Removes a local git, initialises a new git, adds all files with no history.
 
 AUTHOR
   mjnurse.dev - 2020

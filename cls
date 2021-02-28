@@ -1,16 +1,16 @@
 #!/bin/bash
 help_text="
 NAME
-   cls - Clear terminal and putty terminal buffer
+  cls - Clear terminal and putty terminal buffer
 
 USAGE
-   cls
+  cls
 
 DESCRIPTION
-   Clear terminal and putty terminal buffer.
+  Clear terminal and putty terminal buffer.
 
 AUTHOR
-   mjnurse.dev - 2019
+  mjnurse.dev - 2019
 "
 help_line="Clear terminal and putty terminal buffer"
 web_desc_line="Clear terminal and putty terminal buffer"

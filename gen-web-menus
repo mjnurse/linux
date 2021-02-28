@@ -1,20 +1,20 @@
 #!/bin/bash
 help_text="
 NAME
-   bm - One line description.
+  bm - One line description.
 
 USAGE
-   bm [options] <parameters>
+  bm [options] <parameters>
 
 OPTIONS
-   -x
-      Description...
+  -x
+    Description...
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Description description description description.
 
 AUTHOR
   mjnurse.dev - 2020
@@ -110,6 +110,14 @@ for l1_dir in */; do
       { echo "title: ${n//_/ }";
         echo "---"; } >> index.md
 
+      # Add the folder description if the corresponding file exists
+      if [[ -f folder_desc.md ]]; then
+        echo "" >> index.md
+        cat folder_desc.md >> index.md
+        echo "<hr>" >> index.md
+        echo "" >> index.md
+      fi
+
       ((l2_num = 1))
 
       # LOOP THROUGH CHILD FOLDERS/
@@ -143,9 +151,18 @@ for l1_dir in */; do
             { echo "title: ${n//_/ }";
               echo "---"; } >> index.md
 
+            # Add the folder description if the corresponding file exists
+            if [[ -f folder_desc.md ]]; then
+              echo "" >> index.md
+              cat folder_desc.md >> index.md
+              echo "<hr>" >> index.md
+              echo "" >> index.md
+            fi
+
             ((l3_num = 1))
             scripts=n
-            for file in $(ls *.md | sed "s/^Script/zzzScript/" | sort -f | sed "s/^zzz//"); do
+            for file in $(ls *.md | sed "/folder_desc.*/d; s/^Script/zzzScript/" | \
+                          sort -f | sed "s/^zzz//"); do
                if [[ $file =~ Script.* && $scripts == n ]]; then
                   echo >> index.md
                   echo "## Scripts" >> index.md
@@ -172,7 +189,8 @@ for l1_dir in */; do
       if [[ "$l1_dir" =~ Blog.* ]]; then
         rev="-r"
       fi
-      for file in $(ls *.md | sed "s/^Script/zzzScript/" | sort -f $rev | sed "s/^zzz//"); do
+      for file in $(ls *.md | sed "/folder_desc.*/d; s/^Script/zzzScript/" | \
+                    sort -f $rev | sed "s/^zzz//"); do
          if [[ $file =~ Script.* && $scripts == n ]]; then
             echo >> index.md
             echo "## Scripts" >> index.md

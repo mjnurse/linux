@@ -1,13 +1,13 @@
 #!/bin/bash
 help_text="
 NAME
-   gvim - Runs windows gvim and fixes files paths
+  gvim - Runs windows gvim and fixes files paths
 
 USAGE
-   gvim <filename(s)>
+  gvim <filename(s)>
 
 DESCRIPTION
-   Runs windows gvim and fixes files paths.
+  Runs windows gvim and fixes files paths.
 
 AUTHOR
   mjnurse.dev - 2020

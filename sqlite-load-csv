@@ -1,27 +1,27 @@
 #!/bin/bash
 help_text="
 NAME
-   sqlite-load-csv - Load a csv file into a sqlite3 database.
+  sqlite-load-csv - Load a csv file into a sqlite3 database.
 
 USAGE
-   sqlite-load-csv [options] <csv_filename> [<database_name>]
+  sqlite-load-csv [options] <csv_filename> [<database_name>]
 
 OPTIONS
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
-   -t|--table <table name>
-      Specify the name of the table created.
+  -t|--table <table name>
+    Specify the name of the table created.
 
 DESCRIPTION
-   Loads a csv file into a table with the same name as the file (or passed in as an option
-   t|table) into a database the name of which is passed as a parameter or if no database name
-   is specified, a database with the same name as the csv file.
+  Loads a csv file into a table with the same name as the file (or passed in as an option
+  t|table) into a database the name of which is passed as a parameter or if no database name
+  is specified, a database with the same name as the csv file.
 
-   The column names are read from line 1 of the csv file.
+  The column names are read from line 1 of the csv file.
 
-   NOTE: Strips spaces from either side a comma otherwise these are added to
-   to both the column names and the field values.
+  NOTE: Strips spaces from either side a comma otherwise these are added to
+  to both the column names and the field values.
 
 AUTHOR
   mjnurse.dev - 2020

@@ -1,16 +1,16 @@
 #!/bin/bash
 help_text="
 NAME
-   article - Creates a new article
+  article - Creates a new article
 
 USAGE
-   article <Article Title - Words with spaces>
+  article <Article Title - Words with spaces>
 
 DESCRIPTION
-   A basic script to create a new article.
+  A basic script to create a new article.
 
 AUTHOR
-   mjnurse.dev - 2020
+  mjnurse.dev - 2020
 "
 help_line="Creates a new website article: article <title: spaces allowed>"
 web_desc_line="Creates a new website article"

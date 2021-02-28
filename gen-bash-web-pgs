@@ -1,13 +1,13 @@
 #!/bin/bash
 help_text="
 NAME
-   gen_bash_web_pgs - Creates webs pages for bash scripts
+  gen_bash_web_pgs - Creates webs pages for bash scripts
 
 USAGE
-   gen_bash_web_pgs
+  gen_bash_web_pgs
 
 DESCRIPTION
-   Creates webs pages for bash scripts.
+  Creates webs pages for bash scripts.
 
 AUTHOR
   mjnurse.dev - 2020
@@ -59,9 +59,17 @@ for p in default; do
   echo "base64 string.  This is a convenient wat to copy a set of bash scripts" >> $dest
   echo "into a linux environment using only a command line terminal." >> $dest
   echo "" >> $dest
-  echo "\`\`\`bash" >> $dest
+  echo "<script>" >> $dest
+  echo "  let packText=\`$(cat ${p}.pack)" >> $dest
+  echo "\`;" >> $dest
+  echo "</script>" >> $dest
+  echo "" >> $dest
+  echo "## Contents" >> $dest
+  echo "\`\`\`" >> $dest
   h -m $file_list >> $dest
-  echo "\`\`\`bash" >> $dest
+  echo "\`\`\`" >> $dest
+  echo "" >> $dest
+  echo "<button onCLick='copyToClipboard(packText)'>Copy To Clipboard</button>" >> $dest
   echo "" >> $dest
   echo "\`\`\`bash" >> $dest
   cat ${p}.pack >> $dest

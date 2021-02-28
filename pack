@@ -17,10 +17,11 @@ OPTIONS
     Suppress terminal output.
 
 DESCRIPTION
-  Compresses one or more files and convert these to base64 to copy and paste into a command
-  line session.  The output is also written to a file, the name of which can be specified
-  using the -n option.  If no name is specified, for a single file the output is written to
-  '<filename>.pack', for multiple files the output is written to 'multi.pack'.
+  Compresses one or more files and converts these to base64 to copy and paste into a command
+  line session with commands to convert these back to the original file.  The output is also
+  written to a file, the name of which can be specified using the -n option.  If no name is
+  specified, for a single file the output is written to '<filename>.pack', for multiple files
+  the output is written to 'multi.pack'.
 
 AUTHOR
   mjnurse.dev - 2020

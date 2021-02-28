@@ -1,17 +1,17 @@
 #!/bin/bash
 help_text="
 NAME
-   file-mail - Takes images of mail from Google Scanner and moves these to a chosen folder.
+  move-mail - Takes images of mail from Google Scanner and moves these to a chosen folder.
 
 USAGE
-   file-mail [options] <parameters>
+  move-mail [options] <parameters>
 
 OPTIONS
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Takes images of mail from Google Scanner and moves these to a chosen folder.
 
 AUTHOR
   mjnurse.dev - 2020
@@ -34,7 +34,7 @@ if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
    exit
 fi
 
-tmp="/tmp/file.tmp"
+tmp="/tmp/move.tmp"
 
 files="$1"
 echo $files

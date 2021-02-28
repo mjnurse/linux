@@ -1,20 +1,20 @@
 #!/bin/bash
 help_text="
 NAME
-   pg - Connect to postgresql using psql.
+  pg - Connect to postgresql using psql.
 
 USAGE
-   pg [options] <parameters>
+  pg [options] <parameters>
 
 OPTIONS
-   -x
-      Description...
+  -x
+    Description...
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Connect to postgresql using psql.
+  Connect to postgresql using psql.
 
 AUTHOR
   mjnurse.dev - 2020

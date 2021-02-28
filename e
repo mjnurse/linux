@@ -1,23 +1,23 @@
 #!/bin/bash
 help_text="
 NAME
-   e - One line description.
+  e - One line description.
 
 USAGE
-   e <search words>
+  e <search words>
 
 OPTIONS
-   -x
-      Description...
+  -x
+    Description...
 
-   -h|--help
-      Show help text.
+  -h|--help
+    Show help text.
 
 DESCRIPTION
-   Description description description description.
+  Description description description description.
 
 AUTHOR
-  mjnurse.uk 2020
+  mjnurse.dev - 2020
 "
 help_line="tbc"
 web_desc_line="tbc"
@@ -74,13 +74,21 @@ if [[ $run_grep == n ]]; then
   echo "NOTE: No grep run.  Use -g to run a grep"
 fi
 echo
-read -p "Enter Number: " n
+read -p "Enter Number (# or v# - Vim, m# - MS Code): " n
+
+editor="gvim"
+if [[ "${n:0:1}" == "v" ]]; then
+  editor="gvim"
+  n="${n:1}"
+elif [[ "${n:0:1}" == "m" ]]; then
+  editor="code"
+  n="${n:1}"
+fi
 
 let c=1
 while read line; do
   if [[ $c == $n ]]; then
-    # gvim $line
-    code $line
+    $editor "$line"
   fi
   let c=c+1
 done < $tmp

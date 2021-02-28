@@ -1,3 +1,0 @@
-c - calc:                Command line calculator 
-    cls:                 Clear terminal and putty terminal buffer 
-f - file-watch-do:       Watch a file and each time it is modified run a command 

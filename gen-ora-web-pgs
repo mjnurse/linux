@@ -1,13 +1,13 @@
 #!/bin/bash
 help_text="
 NAME
-   gen_ora_web_pgs - Creates web pages for Oracle scripts
+  gen_ora_web_pgs - Creates web pages for Oracle scripts
 
 USAGE
-   gen_ora_web_pgs
+  gen_ora_web_pgs
 
 DESCRIPTION
-   Creates web pages for Oracle scripts.
+  Creates web pages for Oracle scripts.
 
 AUTHOR
   mjnurse.dev - 2020
